@@ -1,7 +1,7 @@
 package com.currencycloud.client;
 
-import co.freeside.betamax.Betamax;
-import co.freeside.betamax.MatchRule;
+import co.freeside.betamax.MatchRules;
+import co.freeside.betamax.junit.Betamax;
 import com.currencycloud.client.model.ConversionDates;
 import com.currencycloud.client.model.Currency;
 import com.currencycloud.client.model.SettlementAccount;
@@ -19,7 +19,7 @@ public class ReferenceTest extends BetamaxTestSupport {
     @Override protected String getAuthToken() { return "1c9da5726314246acfb09ec5651307a5"; }
 
     @Test
-    @Betamax(tape = "can_retrieve_beneficiary_required_details", match = {MatchRule.method, MatchRule.uri, MatchRule.body})
+    @Betamax(tape = "can_retrieve_beneficiary_required_details", match = {MatchRules.method, MatchRules.uri, MatchRules.body})
     public void testCanRetrieveBeneficiaryRequiredDetails() throws Exception {
         List<Map<String, String>> details = client.getBeneficiaryRequiredDetails("GBP", "GB", "GB");
         assertThat(details, not(empty()));
@@ -38,7 +38,7 @@ public class ReferenceTest extends BetamaxTestSupport {
     }
 
     @Test
-    @Betamax(tape = "can_retrieve_conversion_dates", match = {MatchRule.method, MatchRule.uri, MatchRule.body})
+    @Betamax(tape = "can_retrieve_conversion_dates", match = {MatchRules.method, MatchRules.uri, MatchRules.body})
     public void testCanRetrieveConversionDates() throws Exception {
         ConversionDates dates = client.getConversionDates("GBPUSD", null);
 
@@ -51,7 +51,7 @@ public class ReferenceTest extends BetamaxTestSupport {
     }
 
     @Test
-    @Betamax(tape = "can_retrieve_currencies", match = {MatchRule.method, MatchRule.uri, MatchRule.body})
+    @Betamax(tape = "can_retrieve_currencies", match = {MatchRules.method, MatchRules.uri, MatchRules.body})
     public void testCanRetrieveCurrencies() throws Exception {
         List<Currency> currencies = client.getCurrencies();
         assertThat(currencies, not(empty()));
@@ -63,7 +63,7 @@ public class ReferenceTest extends BetamaxTestSupport {
     }
 
     @Test
-    @Betamax(tape = "can_retrieve_settlement_accounts", match = {MatchRule.method, MatchRule.uri, MatchRule.body})
+    @Betamax(tape = "can_retrieve_settlement_accounts", match = {MatchRules.method, MatchRules.uri, MatchRules.body})
     public void testCanRetrieveSettlementAccounts() throws Exception {
         List<SettlementAccount> settlementAccounts = client.getSettlementAccounts("GBP");
         assertThat(settlementAccounts, not(empty()));

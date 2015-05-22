@@ -50,6 +50,15 @@
         <url>https://travis-ci.org/CurrencyCloud/currencycloud-java</url>
     </ciManagement>
 
+    <repositories>
+        <repository>
+            <id>jfrog-snapshots-repo</id>
+            <url>http://oss.jfrog.org/oss-snapshot-local/</url>
+            <releases><enabled>false</enabled></releases>
+            <snapshots><enabled>true</enabled></snapshots>
+        </repository>
+    </repositories>
+
     <build>
         <plugins>
             <plugin>
@@ -84,9 +93,15 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>co.freeside</groupId>
-            <artifactId>betamax</artifactId>
-            <version>1.1.2</version>
+            <groupId>co.freeside.betamax</groupId>
+            <artifactId>betamax-proxy</artifactId>
+            <version>2.0-SNAPSHOT</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>co.freeside.betamax</groupId>
+            <artifactId>betamax-junit</artifactId>
+            <version>2.0-SNAPSHOT</version>
             <scope>test</scope>
         </dependency>
         <dependency>
