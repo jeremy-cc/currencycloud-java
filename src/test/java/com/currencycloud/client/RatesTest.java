@@ -1,6 +1,5 @@
 package com.currencycloud.client;
 
-import co.freeside.betamax.MatchRules;
 import co.freeside.betamax.junit.Betamax;
 import com.currencycloud.client.model.DetailedRate;
 import com.currencycloud.client.model.Rate;
@@ -22,7 +21,7 @@ public class RatesTest extends BetamaxTestSupport {
     @Override protected String getAuthToken() { return "242993ca94b9d1c6c1d8f7d3275a6f36"; }
 
     @Test
-    @Betamax(tape = "can_find", match = {MatchRules.method, MatchRules.uri/*, MatchRules.body*/})
+    @Betamax(tape = "can_find")
     public void testCanFind() throws Exception {
         Rates rates = client.findRates(Arrays.asList("GBPUSD", "EURGBP"), null);
 
@@ -47,7 +46,7 @@ public class RatesTest extends BetamaxTestSupport {
     }
 
     @Test
-    @Betamax(tape = "can_provided_detailed_rate", match = {MatchRules.method, MatchRules.uri/*, MatchRules.body*/})
+    @Betamax(tape = "can_provided_detailed_rate")
     public void testCanProvidedDetailedRate() throws Exception {
         DetailedRate detailedRate = client.detailedRates("GBP", "USD", "buy", new BigDecimal("10000"), null);
 

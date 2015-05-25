@@ -1,6 +1,5 @@
 package com.currencycloud.client;
 
-import co.freeside.betamax.MatchRules;
 import co.freeside.betamax.junit.Betamax;
 import com.currencycloud.client.model.CurrencyCloudException;
 import com.currencycloud.client.model.ErrorMessage;
@@ -18,7 +17,7 @@ public class ErrorTest extends BetamaxTestSupport {
     private String apiKey = "ef0fd50fca1fb14c1fab3a8436b9ecb65f02f129fd87eafa45ded8ae257528f0";
 
     @Test
-    @Betamax(tape = "contains_full_details_for_api_error", match = {MatchRules.method, MatchRules.uri, MatchRules.body})
+    @Betamax(tape = "contains_full_details_for_api_error")
     public void testContainsFullDetailsForApiError() throws Exception {
         loginId = "non-existent-login-id";
         apiKey = "ef0fd50fca1fb14c1fab3a8436b9ecb57528f0";
@@ -30,7 +29,7 @@ public class ErrorTest extends BetamaxTestSupport {
     }
 
     @Test
-    @Betamax(tape = "is_raised_on_a_bad_request", match = {MatchRules.method, MatchRules.uri, MatchRules.body})
+    @Betamax(tape = "is_raised_on_a_bad_request")
     public void testIsRaisedOnABadRequest() throws Exception {
         loginId = "non-existent-login-id";
         apiKey = "ef0fd50fca1fb14c1fab3a8436b9ecb57528f0";
@@ -43,7 +42,7 @@ public class ErrorTest extends BetamaxTestSupport {
     }
 
     @Test
-    @Betamax(tape = "is_raised_on_incorrect_authentication_details", match = {MatchRules.method, MatchRules.uri, MatchRules.body})
+    @Betamax(tape = "is_raised_on_incorrect_authentication_details")
     public void testIsRaisedOnIncorrectAuthenticationDetails() throws Exception {
         loginId = "non-existent-login-id";
         apiKey = "efb5ae2af84978b7a37f18dd61c8bbe139b403009faea83484405a3dcb64c4d8";
@@ -84,7 +83,7 @@ inner_error: Timeout::Error
 */
 
     @Test
-    @Betamax(tape = "is_raised_on_a_forbidden_request", match = {MatchRules.method, MatchRules.uri, MatchRules.body})
+    @Betamax(tape = "is_raised_on_a_forbidden_request")
     public void testIsRaisedOnAForbiddenRequest() throws Exception {
         CurrencyCloudException error = testFailedLogin("auth_failed", 403);
         assertThat(error.getErrorCode(), equalTo("auth_failed"));
@@ -98,7 +97,7 @@ inner_error: Timeout::Error
     }
 
     @Test
-    @Betamax(tape = "is_raised_when_a_resource_is_not_found", match = {MatchRules.method, MatchRules.uri, MatchRules.body})
+    @Betamax(tape = "is_raised_when_a_resource_is_not_found")
     public void testIsRaisedWhenAResourceIsNotFound() throws Exception {
         client.setAuthToken("656485646b068f6e9c81e3d885fa54f5");
 
@@ -118,7 +117,7 @@ inner_error: Timeout::Error
     }
 
     @Test
-    @Betamax(tape = "is_raised_on_an_internal_server_error", match = {MatchRules.method, MatchRules.uri, MatchRules.body})
+    @Betamax(tape = "is_raised_on_an_internal_server_error")
     public void testIsRaisedOnAnInternalServerError() throws Exception {
         CurrencyCloudException error = testFailedLogin("internal_application_error", 500);
         ErrorMessage errorMessage = error.getErrorMessages().get("base").get(0);
@@ -128,7 +127,7 @@ inner_error: Timeout::Error
     }
 
     @Test
-    @Betamax(tape = "is_raised_when_too_many_requests_have_been_issued", match = {MatchRules.method, MatchRules.uri, MatchRules.body})
+    @Betamax(tape = "is_raised_when_too_many_requests_have_been_issued")
     public void testIsRaisedWhenTooManyRequestsHaveBeenIssued() throws Exception {
         loginId = "rjnienaber@gmail.com2";
         CurrencyCloudException error = testFailedLogin("too_many_requests", 429);

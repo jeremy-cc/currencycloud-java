@@ -1,6 +1,5 @@
 package com.currencycloud.client;
 
-import co.freeside.betamax.MatchRules;
 import co.freeside.betamax.junit.Betamax;
 import org.junit.Test;
 
@@ -10,14 +9,14 @@ import static org.hamcrest.junit.MatcherAssert.assertThat;
 public class AuthenticationTest extends BetamaxTestSupport {
 
     @Test
-    @Betamax(tape = "can_use_just_a_token", match = {MatchRules.method, MatchRules.uri, MatchRules.body})
+    @Betamax(tape = "can_use_just_a_token")
     public void testCanUseJustAToken() throws Exception {
         client.setAuthToken("7fbba909f66ee6721b2e20a5fa1ccae7");
         assertThat(client.findBeneficiaries(), notNullValue());
     }
 
     @Test
-    @Betamax(tape = "can be closed", match = {MatchRules.method, MatchRules.uri, MatchRules.body})
+    @Betamax(tape = "can be closed")
     public void testCanBeClosed() throws Exception {
         client.authenticate("rjnienaber@gmail.com", "ef0fd50fca1fb14c1fab3a8436b9ecb65f02f129fd87eafa45ded8ae257528f0");
         client.endSession();

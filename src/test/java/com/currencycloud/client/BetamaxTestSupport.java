@@ -1,5 +1,6 @@
 package com.currencycloud.client;
 
+import co.freeside.betamax.MatchRules;
 import co.freeside.betamax.ProxyConfiguration;
 import co.freeside.betamax.TapeMode;
 import co.freeside.betamax.junit.RecorderRule;
@@ -37,6 +38,8 @@ public class BetamaxTestSupport extends JsonTestSupport {
                 .ignoreHosts(Collections.<String>emptyList())
                 .ignoreLocalhost(false)
                 .sslEnabled(true)
+                // todo: This doesn't work, see https://github.com/robfletcher/betamax/issues/159 .
+                .defaultMatchRules(MatchRules.method, MatchRules.uri, MatchRules.body, MyMatchRules.includesHeaders)
                 .build());
     }
 }

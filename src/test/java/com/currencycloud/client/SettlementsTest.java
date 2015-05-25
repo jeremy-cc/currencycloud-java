@@ -1,6 +1,5 @@
 package com.currencycloud.client;
 
-import co.freeside.betamax.MatchRules;
 import co.freeside.betamax.junit.Betamax;
 import com.currencycloud.client.model.Conversion;
 import com.currencycloud.client.model.Settlement;
@@ -18,7 +17,7 @@ public class SettlementsTest extends BetamaxTestSupport {
     @Override protected String getAuthToken() { return "6f5f99d1b860fc47e8a186e3dce0d3f9"; }
 
     @Test
-    @Betamax(tape = "can_add_conversion", match = {MatchRules.method, MatchRules.uri, MatchRules.body})
+    @Betamax(tape = "can_add_conversion")
     public void testCanAddConversion() throws Exception {
         Conversion conversion = client.createConversion(
                 "GBP", "USD", "buy", new BigDecimal(1000), "mortgage payment", true,
@@ -71,7 +70,7 @@ public class SettlementsTest extends BetamaxTestSupport {
     }
 
     @Test
-    @Betamax(tape = "can_remove_conversion", match = {MatchRules.method, MatchRules.uri, MatchRules.body})
+    @Betamax(tape = "can_remove_conversion")
     public void testCanRemoveConversion() throws Exception {
         Settlement settlement = client.retrieveSettlement("63eeef54-3531-4e65-827a-7d0f37503fcc");
         Settlement deletedSettlement = client.removeConversion(settlement.getId(), "24d2ee7f-c7a3-4181-979e-9c58dbace992");
@@ -83,7 +82,7 @@ public class SettlementsTest extends BetamaxTestSupport {
     }
 
     @Test
-    @Betamax(tape = "can_release", match = {MatchRules.method, MatchRules.uri, MatchRules.body})
+    @Betamax(tape = "can_release")
     public void testCanRelease() throws Exception {
         Settlement settlement = client.retrieveSettlement("51c619e0-0256-40ad-afba-ca4114b936f9");
         Settlement releasedSettlement = client.releaseSettlement(settlement.getId());
@@ -94,7 +93,7 @@ public class SettlementsTest extends BetamaxTestSupport {
     }
 
     @Test
-    @Betamax(tape = "can_unrelease", match = {MatchRules.method, MatchRules.uri, MatchRules.body})
+    @Betamax(tape = "can_unrelease")
     public void testCanUnrelease() throws Exception {
         Settlement settlement = client.retrieveSettlement("51c619e0-0256-40ad-afba-ca4114b936f9");
         Settlement unreleaseSettlement = client.unreleaseSettlement(settlement.getId());
